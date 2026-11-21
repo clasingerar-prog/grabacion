@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grabadora Ligera de Conferencias y Línea</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Grabadora de Audio Ligera</h1>
+      <p class="subtitle">Captura compartida de bajo consumo • Opus & MP3</p>
+    </header>
+
+    <!-- Configuración de Fuente de Audio -->
+    <section class="card">
+      <h2>1. Fuente de entrada de audio</h2>
+
+      <div class="form-group">
+        <label for="sourceMode">Modo de captura:</label>
+        <select id="sourceMode">
+          <option value="device">Entrada de Línea / Micrófono (Dispositivo de audio)</option>
+          <option value="system">Audio del Sistema / Pestaña / Reunión</option>
+          <option value="both">Ambos mezclados (Entrada de Línea + Audio Sistema)</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="deviceSelectGroup">
+        <div class="label-row">
+          <label for="audioDeviceSelect">Dispositivo de entrada (Línea / Mic):</label>
+          <button type="button" id="refreshDevicesBtn" class="btn-link" title="Actualizar lista de dispositivos">
+            ↻ Actualizar lista
+          </button>
+        </div>
+        <select id="audioDeviceSelect">
+          <option value="">Detectar dispositivo predeterminado...</option>
+        </select>
+        <small class="hint">
+          Usa modo compartido del sistema operativo (no exclusivo) para convivir con otras apps.
+        </small>
+      </div>
+
+      <div class="grid-2">
+        <div class="form-group">
+          <label for="opusBitrate">Calidad de grabación (Opus):</label>
+          <select id="opusBitrate">
+            <option value="32000">32 kbps (Ultra ligero ~14 MB/h)</option>
+            <option value="48000" selected>48 kbps (Recomendado voz ~21 MB/h)</option>
+            <option value="64000">64 kbps (Alta claridad ~28 MB/h)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="mp3Bitrate">Calidad al exportar MP3 (Mono):</label>
+          <select id="mp3Bitrate">
+            <option value="64" selected>64 kbps (Ligero ~28 MB/h)</option>
+            <option value="96">96 kbps (Equilibrado ~42 MB/h)</option>
+            <option value="128">128 kbps (Estándar ~56 MB/h)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="monitor-controls">
+        <button type="button" id="testInputBtn" class="btn btn-secondary">
+          Probar entrada de audio
+        </button>
+        <span id="inputStatusText" class="status-note">Entrada inactiva</span>
+      </div>
+    </section>
+
+    <!-- Monitor Visual, Tiempo y Controles -->
+    <section class="card">
+      <div class="status-bar">
+        <div class="badge" id="recBadge">
+          <span class="dot" id="recDot"></span>
+          <span id="recStateText">LISTO</span>
+        </div>
+        <div class="timer" id="timerDisplay">00:00:00</div>
+      </div>
+
+      <!-- Gráfico de entrada de audio (bajo consumo) -->
+      <div class="meter-wrapper">
+        <canvas id="audioMeterCanvas" width="600" height="72"></canvas>
+        <div class="meter-scale">
+          <span>Silencio</span>
+          <span id="peakLabel">Nivel: -∞ dB</span>
+          <span>Pico</span>
+        </div>
+      </div>
+
+      <!-- Controles principales -->
+      <div class="controls">
+        <button type="button" id="startBtn" class="btn btn-primary">
+          ● Grabar
+        </button>
+        <button type="button" id="pauseBtn" class="btn btn-warning" disabled>
+          ❚❚ Pausar
+        </button>
+        <button type="button" id="stopBtn" class="btn btn-danger" disabled>
+          ■ Detener
+        </button>
+      </div>
+    </section>
+
+    <!-- Resultados y Descarga -->
+    <section class="card hidden" id="exportSection">
+      <h2>3. Grabación finalizada</h2>
+
+      <audio id="audioPreview" controls class="audio-player"></audio>
+
+      <div class="file-meta" id="fileMeta"></div>
+
+      <div class="export-actions">
+        <button type="button" id="downloadOpusBtn" class="btn btn-secondary">
+          ⬇ Descargar original (Opus / WebM)
+        </button>
+        <button type="button" id="convertMp3Btn" class="btn btn-primary">
+          ⚙ Convertir y descargar MP3
+        </button>
+      </div>
+
+      <!-- Progreso de conversión MP3 -->
+      <div class="progress-box hidden" id="mp3ProgressBox">
+        <div class="progress-header">
+          <span id="mp3ProgressLabel">Convirtiendo a MP3...</span>
+          <span id="mp3ProgressPercent">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="mp3ProgressFill"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
