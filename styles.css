@@ -24,7 +24,6 @@
 }
 
 html {
-  /* Escalado fluido de toda la interfaz según el ancho de pantalla */
   font-size: clamp(14px, 1.1vw, 17px);
 }
 
@@ -50,7 +49,6 @@ body {
   gap: clamp(1rem, 2vw, 1.5rem);
 }
 
-/* Encabezado centrado */
 .header {
   text-align: center;
   padding: 0.25rem 0;
@@ -71,7 +69,6 @@ body {
   font-size: clamp(0.85rem, 1.3vw, 0.98rem);
 }
 
-/* Tarjetas sobrias */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -114,7 +111,7 @@ label {
 }
 
 select,
-input[type="text"] {
+.text-input {
   width: 100%;
   padding: 0.68rem 0.85rem;
   border-radius: 10px;
@@ -131,58 +128,50 @@ select {
 }
 
 select:hover:not(:disabled),
-input[type="text"]:hover:not(:disabled) {
+.text-input:hover:not(:disabled) {
   border-color: #475569;
 }
 
 select:focus,
-input[type="text"]:focus {
+.text-input:focus {
   outline: none;
   border-color: var(--border-focus);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
-/* Control de Ganancia */
+/* Control de ganancia */
 .gain-box {
   background: rgba(15, 23, 42, 0.55);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 0.8rem 0.95rem;
-}
-
-.gain-actions {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
 }
 
 .gain-badge {
   font-family: "Cascadia Code", "Consolas", monospace;
-  font-size: 0.84rem;
-  font-weight: 700;
+  font-size: 0.82rem;
   color: #93c5fd;
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(59, 130, 246, 0.14);
   padding: 0.15rem 0.55rem;
   border-radius: 6px;
 }
 
-input[type="range"] {
-  width: 100%;
-  accent-color: var(--accent-blue);
-  cursor: pointer;
-  margin: 0.35rem 0 0.2rem;
+.gain-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-.range-scale {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.74rem;
-  color: var(--text-secondary);
+input[type="range"] {
+  flex: 1;
+  accent-color: var(--accent-blue);
+  cursor: pointer;
+  height: 6px;
 }
 
 .hint {
   display: block;
-  margin-top: 0.4rem;
+  margin-top: 0.45rem;
   font-size: 0.8rem;
   color: var(--text-secondary);
   text-align: center;
@@ -199,10 +188,10 @@ input[type="range"] {
   border: none;
   color: #60a5fa;
   font-family: inherit;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 500;
   cursor: pointer;
-  padding: 0.15rem 0.4rem;
+  padding: 0.2rem 0.45rem;
   border-radius: 6px;
   transition: background 0.15s ease;
 }
@@ -227,7 +216,6 @@ input[type="range"] {
   color: var(--text-secondary);
 }
 
-/* Estado y Cronómetro */
 .status-bar {
   display: flex;
   flex-wrap: wrap;
@@ -280,7 +268,6 @@ input[type="range"] {
   color: #f8fafc;
 }
 
-/* Vúmetro */
 .meter-wrapper {
   background: #090d14;
   border: 1px solid var(--border);
@@ -305,7 +292,6 @@ input[type="range"] {
   font-family: "Cascadia Code", "Consolas", monospace;
 }
 
-/* Botones responsivos */
 .controls {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -367,7 +353,6 @@ input[type="range"] {
   background: #232f44;
 }
 
-/* Sección de exportación */
 .audio-player {
   width: 100%;
   margin-bottom: 0.85rem;
