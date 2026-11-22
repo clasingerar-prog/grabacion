@@ -44,26 +44,14 @@
       <!-- Control de Ganancia / Volumen de entrada -->
       <div class="form-group gain-box">
         <div class="label-row">
-          <label for="inputGainSlider">Ganancia / Volumen de entrada:</label>
-          <div class="gain-actions">
-            <span id="inputGainValue" class="gain-badge">100%</span>
-            <button type="button" id="resetGainBtn" class="btn-link" title="Restablecer al 100%">
-              Restablecer
-            </button>
-          </div>
+          <label for="gainSlider">Ganancia / Volumen de entrada:</label>
+          <span class="gain-badge" id="gainValueLabel">100% (0.0 dB)</span>
         </div>
-        <input
-          type="range"
-          id="inputGainSlider"
-          min="0"
-          max="200"
-          step="5"
-          value="100"
-        />
-        <div class="range-scale">
-          <span>0% (Silencio)</span>
-          <span>100% (Original)</span>
-          <span>200% (+6 dB)</span>
+        <div class="gain-row">
+          <input type="range" id="gainSlider" min="0" max="200" step="5" value="100" />
+          <button type="button" id="resetGainBtn" class="btn-link" title="Restaurar ganancia normal">
+            Normal
+          </button>
         </div>
       </div>
 
@@ -139,25 +127,24 @@
 
       <div class="file-meta" id="fileMeta"></div>
 
-      <!-- Nombre de archivo personalizable -->
+      <!-- Nombre de archivo y carpeta -->
       <div class="form-group">
-        <label for="customFilenameInput">Nombre del archivo (opcional):</label>
-        <input
-          type="text"
-          id="customFilenameInput"
-          placeholder="Ej: Conferencia_Ventas (se añadirá fecha y hora)"
-          maxlength="80"
-        />
+        <label for="filenameInput">Nombre del archivo (sin extensión):</label>
+        <input type="text" id="filenameInput" class="text-input" placeholder="Ej: conferencia_lunes" />
       </div>
 
       <div class="export-actions">
         <button type="button" id="downloadOpusBtn" class="btn btn-secondary">
-          ⬇ Descargar original (Opus / WebM)
+          ⬇ Guardar original (Opus)
         </button>
         <button type="button" id="convertMp3Btn" class="btn btn-primary">
-          ⚙ Convertir y descargar MP3
+          ⚙ Convertir y guardar MP3
         </button>
       </div>
+
+      <small class="hint">
+        En Chrome/Edge te permitirá elegir la carpeta de destino antes de guardar.
+      </small>
 
       <!-- Progreso de conversión MP3 -->
       <div class="progress-box hidden" id="mp3ProgressBox">
