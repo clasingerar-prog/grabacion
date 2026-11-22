@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grabadora Ligera de Conferencias y Línea</title>
+  <title>Grabadora de Audio Ligera</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,9 +13,9 @@
       <p class="subtitle">Captura compartida de bajo consumo • Opus & MP3</p>
     </header>
 
-    <!-- Configuración de Fuente de Audio -->
+    <!-- 1. Configuración de Fuente de Audio -->
     <section class="card">
-      <h2>1. Fuente de entrada de audio</h2>
+      <h2>1. Fuente y nivel de entrada</h2>
 
       <div class="form-group">
         <label for="sourceMode">Modo de captura:</label>
@@ -39,6 +39,32 @@
         <small class="hint">
           Usa modo compartido del sistema operativo (no exclusivo) para convivir con otras apps.
         </small>
+      </div>
+
+      <!-- Control de Ganancia / Volumen de entrada -->
+      <div class="form-group gain-box">
+        <div class="label-row">
+          <label for="inputGainSlider">Ganancia / Volumen de entrada:</label>
+          <div class="gain-actions">
+            <span id="inputGainValue" class="gain-badge">100%</span>
+            <button type="button" id="resetGainBtn" class="btn-link" title="Restablecer al 100%">
+              Restablecer
+            </button>
+          </div>
+        </div>
+        <input
+          type="range"
+          id="inputGainSlider"
+          min="0"
+          max="200"
+          step="5"
+          value="100"
+        />
+        <div class="range-scale">
+          <span>0% (Silencio)</span>
+          <span>100% (Original)</span>
+          <span>200% (+6 dB)</span>
+        </div>
       </div>
 
       <div class="grid-2">
@@ -69,8 +95,10 @@
       </div>
     </section>
 
-    <!-- Monitor Visual, Tiempo y Controles -->
+    <!-- 2. Monitor Visual, Tiempo y Controles -->
     <section class="card">
+      <h2>2. Monitor y control de grabación</h2>
+
       <div class="status-bar">
         <div class="badge" id="recBadge">
           <span class="dot" id="recDot"></span>
@@ -103,13 +131,24 @@
       </div>
     </section>
 
-    <!-- Resultados y Descarga -->
+    <!-- 3. Resultados y Descarga -->
     <section class="card hidden" id="exportSection">
       <h2>3. Grabación finalizada</h2>
 
       <audio id="audioPreview" controls class="audio-player"></audio>
 
       <div class="file-meta" id="fileMeta"></div>
+
+      <!-- Nombre de archivo personalizable -->
+      <div class="form-group">
+        <label for="customFilenameInput">Nombre del archivo (opcional):</label>
+        <input
+          type="text"
+          id="customFilenameInput"
+          placeholder="Ej: Conferencia_Ventas (se añadirá fecha y hora)"
+          maxlength="80"
+        />
+      </div>
 
       <div class="export-actions">
         <button type="button" id="downloadOpusBtn" class="btn btn-secondary">
